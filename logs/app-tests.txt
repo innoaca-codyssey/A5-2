@@ -1,0 +1,8 @@
+test_approval_and_rejection_form (test_app.ExplanationTests.test_approval_and_rejection_form) ... 2026-10-23 02:12:52.822 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_provenance_and_additivity (test_app.ExplanationTests.test_provenance_and_additivity) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.085s
+
+OK

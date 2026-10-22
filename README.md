@@ -4,7 +4,7 @@ A5-1에서 생성한 동일 금융 데이터와 분류 모델을 사용해 고�
 
 ## 실행 환경
 
-미션 전용 Python venv에서 실행합니다. 전처리/분류 모델과 데이터의 동일성부터 검증합니다.
+미션 전용 Python3.12.14 venv에서 실행했습니다. Scikit-learn/SHAP/Streamlit의 실제 버전은 requirements.txt에 고정했습니다.
 
 ## 분석 순서
 
@@ -87,3 +87,50 @@ PC1은17.47%, PC2는17.13%, 두 축의 합은34.61%입니다. 나머지65.39%의
 ![부채비율 기여](outputs/dependence-debt_ratio.png)
 
 부채비율0.5 부근 이후 양의 기여가 많아졌습니다. 이미 연체가 없어도 고부채 고객은 개별 기여를 확인하고 한도 제안의 범위를 조정하는 실험 대상으로 볼 수 있습니다. 이 그래프는 모델의 관측된 연관이며 부채를 낮췄을 때의 인과 효과를 측정한 것이 아닙니다.
+
+## DBSCAN 비교
+
+동일하게 표준화한6변수에 min_samples15, eps0.5/0.8/1.1을 적용했습니다.
+
+| eps | 군집 수 | 노이즈 비율 | 노이즈 제외 Silhouette |
+|---|---:|---:|---:|
+| 0.5 | 0 | 100.00% | 정의되지 않음 |
+| 0.8 | 13 | 35.63% | -0.203906 |
+| 1.1 | 3 | 6.17% | 0.086077 |
+
+eps0.5에서는 모두 노이즈였고0.8은13개로 잘게 나뉘며 음의 Silhouette가 나왔습니다. 1.1은3군집/노이즈6.17%/Silhouette0.0861이었습니다. K-Means2의0.1363과 비교하되 DBSCAN은 노이즈를 제외한 표본이므로 지표의 모집단이 다름을 구분합니다. 연속적이고 대부분 독립으로 생성한 입력에 뚜렷한 밀도 경계가 있다고 강제하지 않았습니다.
+
+## 고객 입력 화면
+
+```bash
+streamlit run app.py --browser.gatherUsageStats false
+```
+
+나이/연 소득/소비 점수/부채비율/카드 수/최근 연체를 입력하면 동일한 RF의 연체 확률과0.5 기준 판단, Waterfall과 변수별 기여 표를 표시합니다. 원문의 대시보드 설명 중 이탈 확률 표현은 실제 타겟에 맞춰 연체 확률로 구분했습니다.
+
+```text
+$ python -m unittest discover -s tests -v
+Ran 2 tests in 1.085s
+OK
+```
+
+[AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest)로6개 입력에 실제 승인/거절 사례를 넣고 화면의 확률/판단/6행 기여 표가 모델 출력과 일치하는지 확인했습니다. 동일 데이터/모델 해시와 SHAP 가산성도 확인했습니다. 브라우저의 화면 배치 검증을 대신하는 결과로 해석하지 않습니다.
+
+## 설치와 재현
+
+Python3.12.14, Scikit-learn1.9.1, SHAP0.54.1, Streamlit1.66.1입니다.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python prepare.py --source /path/to/A5-1 --data /path/to/finance_data.csv
+python analysis_clustering.py
+python analysis_shap.py
+python -m unittest discover -s tests -v
+streamlit run app.py --browser.gatherUsageStats false
+```
+
+source에는 A5-1 제출 저장소 경로를 지정합니다. prepare는 데이터/모델 해시를 확인하고6입력 검증 모듈/분류 모델/같은 Train-Test행 위치를 연결합니다. 이후 분석에서도 해시를 재확인합니다. 예측 모델을 새로 학습하거나 원본 CSV를 고치지 않습니다.
+
+[TreeExplainer](https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html)의 경로 기반 기대값/출력 의미를 참고했습니다. SHAP은 이 분류기의 판단을 설명하며 실제 개인의 인과적 연체 원인이나 제안 전략의 효과를 증명하지 않습니다.
