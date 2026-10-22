@@ -1,0 +1,21 @@
+{
+  "data_sha256": "4ddf83dd154ee23bb2374a2bbc1aa56d537ef7ad5114c2f162078756542fe1a2",
+  "model_sha256": "9ddb3ea4c094f839de600aaaad8167a9fc8117919df85cdd86101c020f3a4b03",
+  "features": [
+    "age",
+    "annual_income",
+    "spending_score",
+    "debt_ratio",
+    "credit_card_count",
+    "overdue_count_6m"
+  ],
+  "train": 8000,
+  "seed": 42,
+  "best_parameters": {
+    "model__max_depth": 12,
+    "model__min_samples_leaf": 1,
+    "model__n_estimators": 160
+  },
+  "best_train_cv_f1": 0.6659163450327943,
+  "test_rows": 2000
+}

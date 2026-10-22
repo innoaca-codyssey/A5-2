@@ -1,0 +1,122 @@
+{
+  "features": [
+    "age",
+    "annual_income",
+    "spending_score",
+    "debt_ratio",
+    "credit_card_count",
+    "overdue_count_6m"
+  ],
+  "data_sha256": "4ddf83dd154ee23bb2374a2bbc1aa56d537ef7ad5114c2f162078756542fe1a2",
+  "selection": [
+    {
+      "k": 2,
+      "inertia": 52274.24482338985,
+      "silhouette": 0.1362759139431328
+    },
+    {
+      "k": 3,
+      "inertia": 47231.890285411966,
+      "silhouette": 0.12482688427017924
+    },
+    {
+      "k": 4,
+      "inertia": 43140.45629680614,
+      "silhouette": 0.12785977618226374
+    },
+    {
+      "k": 5,
+      "inertia": 39830.627032965975,
+      "silhouette": 0.13064531824732387
+    },
+    {
+      "k": 6,
+      "inertia": 37296.41730438685,
+      "silhouette": 0.13483085761171135
+    },
+    {
+      "k": 7,
+      "inertia": 35279.32121130664,
+      "silhouette": 0.1359961935592048
+    },
+    {
+      "k": 8,
+      "inertia": 33690.80726927058,
+      "silhouette": 0.13419701773556408
+    }
+  ],
+  "selected_k": 2,
+  "explained_variance_ratio": [
+    0.17474758128332862,
+    0.17132829253633702
+  ],
+  "personas": [
+    {
+      "cluster": 0,
+      "count": 3931,
+      "mean": {
+        "age": 44.80742813533452,
+        "annual_income": 5054.322818621216,
+        "spending_score": 50.49020605443907,
+        "debt_ratio": 0.5063825998473671,
+        "credit_card_count": 5.048333757313661,
+        "overdue_count_6m": 1.2872042737216993
+      },
+      "median": {
+        "age": 45.0,
+        "annual_income": 5024.0,
+        "spending_score": 51.0,
+        "debt_ratio": 0.51,
+        "credit_card_count": 5.0,
+        "overdue_count_6m": 1.0
+      },
+      "predicted_overdue_mean": 0.340288330329183,
+      "observed_overdue_fraction_posthoc": 0.2279318239633681
+    },
+    {
+      "cluster": 1,
+      "count": 6069,
+      "mean": {
+        "age": 44.49925852694019,
+        "annual_income": 5020.146646894052,
+        "spending_score": 49.47520184544406,
+        "debt_ratio": 0.49802603394298905,
+        "credit_card_count": 4.998517053880375,
+        "overdue_count_6m": 0.0
+      },
+      "median": {
+        "age": 44.0,
+        "annual_income": 4969.0,
+        "spending_score": 49.0,
+        "debt_ratio": 0.5,
+        "credit_card_count": 5.0,
+        "overdue_count_6m": 0.0
+      },
+      "predicted_overdue_mean": 0.09229860862689496,
+      "observed_overdue_fraction_posthoc": 0.05025539627615752
+    }
+  ],
+  "dbscan": [
+    {
+      "eps": 0.5,
+      "min_samples": 15,
+      "clusters": 0,
+      "noise_fraction": 1.0,
+      "silhouette_non_noise": null
+    },
+    {
+      "eps": 0.8,
+      "min_samples": 15,
+      "clusters": 13,
+      "noise_fraction": 0.3563,
+      "silhouette_non_noise": -0.20390621683440954
+    },
+    {
+      "eps": 1.1,
+      "min_samples": 15,
+      "clusters": 3,
+      "noise_fraction": 0.0617,
+      "silhouette_non_noise": 0.08607657719801898
+    }
+  ]
+}
