@@ -1,0 +1,149 @@
+{
+  "data_sha256": "4ddf83dd154ee23bb2374a2bbc1aa56d537ef7ad5114c2f162078756542fe1a2",
+  "model_sha256": "9ddb3ea4c094f839de600aaaad8167a9fc8117919df85cdd86101c020f3a4b03",
+  "sample": "seed42, 1000 distinct Test rows",
+  "maximum_additivity_error": 9.041378756791119e-15,
+  "ranking": [
+    "annual_income",
+    "overdue_count_6m",
+    "debt_ratio",
+    "spending_score",
+    "age",
+    "credit_card_count"
+  ],
+  "cluster_representatives": [
+    {
+      "cluster": 0,
+      "row_index": 6225,
+      "centroid_distance": 0.5355170468025939,
+      "features": {
+        "age": 45.0,
+        "annual_income": 5396.0,
+        "spending_score": 43.0,
+        "debt_ratio": 0.46,
+        "credit_card_count": 5.0,
+        "overdue_count_6m": 1.0
+      },
+      "probability": 0.004132448647768282,
+      "contributions": {
+        "age": -0.00799700440140967,
+        "annual_income": -0.36979080344161996,
+        "spending_score": -0.0067622093065154276,
+        "debt_ratio": -0.10228522141441493,
+        "credit_card_count": -0.008418522374998337,
+        "overdue_count_6m": -0.00016222791327560751
+      }
+    },
+    {
+      "cluster": 1,
+      "row_index": 2707,
+      "centroid_distance": 0.401114627650134,
+      "features": {
+        "age": 40.0,
+        "annual_income": 4645.0,
+        "spending_score": 54.0,
+        "debt_ratio": 0.5,
+        "credit_card_count": 5.0,
+        "overdue_count_6m": 0.0
+      },
+      "probability": 0.002256284032517831,
+      "contributions": {
+        "age": -0.004275615632225596,
+        "annual_income": -0.1648554709903776,
+        "spending_score": -0.010992673745745607,
+        "debt_ratio": -0.11125594055114005,
+        "credit_card_count": -0.006111530389154789,
+        "overdue_count_6m": -0.19980092215883896
+      }
+    }
+  ],
+  "global": {
+    "age": {
+      "mean_absolute_shap": 0.016062568113744003,
+      "lower_quartile_shap_mean": -0.02692505204560849,
+      "upper_quartile_shap_mean": -0.01568226105980512
+    },
+    "annual_income": {
+      "mean_absolute_shap": 0.23814004370050748,
+      "lower_quartile_shap_mean": 0.1724632312876308,
+      "upper_quartile_shap_mean": -0.3778016384858104
+    },
+    "spending_score": {
+      "mean_absolute_shap": 0.017596326754750674,
+      "lower_quartile_shap_mean": -0.024502915674433766,
+      "upper_quartile_shap_mean": -0.022032942454900888
+    },
+    "debt_ratio": {
+      "mean_absolute_shap": 0.12031789345695558,
+      "lower_quartile_shap_mean": -0.18233199784927667,
+      "upper_quartile_shap_mean": 0.11183982092453058
+    },
+    "credit_card_count": {
+      "mean_absolute_shap": 0.009489638647337519,
+      "lower_quartile_shap_mean": -0.012017693666263743,
+      "upper_quartile_shap_mean": -0.006655945028675014
+    },
+    "overdue_count_6m": {
+      "mean_absolute_shap": 0.15293374484677977,
+      "lower_quartile_shap_mean": -0.18580261749981747,
+      "upper_quartile_shap_mean": 0.10282624183855249
+    }
+  },
+  "dependence": [
+    "annual_income",
+    "overdue_count_6m",
+    "debt_ratio"
+  ],
+  "cases": [
+    {
+      "decision": "approval",
+      "row_index": 8156,
+      "features": {
+        "age": 28.0,
+        "annual_income": 5529.0,
+        "spending_score": 76.0,
+        "debt_ratio": 0.04,
+        "credit_card_count": 8.0,
+        "overdue_count_6m": 0.0
+      },
+      "true_is_overdue": 0,
+      "probability": 0.0,
+      "base_value": 0.4995484375,
+      "contributions": {
+        "age": -0.00790149817564225,
+        "annual_income": -0.2136071043308446,
+        "spending_score": 0.0003116218134647007,
+        "debt_ratio": -0.14757253085983543,
+        "credit_card_count": -0.002475415875373047,
+        "overdue_count_6m": -0.12830351007176838
+      },
+      "additivity_residual": -9.992007221626409e-16
+    },
+    {
+      "decision": "rejection",
+      "row_index": 9205,
+      "features": {
+        "age": 37.0,
+        "annual_income": 2105.0,
+        "spending_score": 94.0,
+        "debt_ratio": 0.88,
+        "credit_card_count": 8.0,
+        "overdue_count_6m": 2.0
+      },
+      "true_is_overdue": 1,
+      "probability": 0.9774365620181585,
+      "base_value": 0.4995484375,
+      "contributions": {
+        "age": 0.010015080719641136,
+        "annual_income": 0.21120597851315778,
+        "spending_score": -0.027345612344467533,
+        "debt_ratio": 0.10852258215784547,
+        "credit_card_count": 0.002426254586455305,
+        "overdue_count_6m": 0.17306384088552468
+      },
+      "additivity_residual": 1.6653345369377348e-15
+    }
+  ],
+  "threshold": 0.5,
+  "original_threshold_note": "원문 확률5 이상은 불가능하므로0.5로 해석한 실행 기준"
+}
