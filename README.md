@@ -103,18 +103,24 @@ eps0.5에서는 모두 노이즈였고0.8은13개로 잘게 나뉘며 음의 Sil
 ## 고객 입력 화면
 
 ```bash
-streamlit run app.py --browser.gatherUsageStats false
+streamlit run app.py --server.headless true --browser.gatherUsageStats false
 ```
 
 나이/연 소득/소비 점수/부채비율/카드 수/최근 연체를 입력하면 동일한 RF의 연체 확률과0.5 기준 판단, Waterfall과 변수별 기여 표를 표시합니다. 원문의 대시보드 설명 중 이탈 확률 표현은 실제 타겟에 맞춰 연체 확률로 구분했습니다.
 
 ```text
 $ python -m unittest discover -s tests -v
-Ran 2 tests in 1.085s
+----------------------------------------------------------------------
+Ran 2 tests in 0.600s
+
 OK
 ```
 
-[AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest)로6개 입력에 실제 승인/거절 사례를 넣고 화면의 확률/판단/6행 기여 표가 모델 출력과 일치하는지 확인했습니다. 동일 데이터/모델 해시와 SHAP 가산성도 확인했습니다. 브라우저의 화면 배치 검증을 대신하는 결과로 해석하지 않습니다.
+[AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest)로6개 입력에 실제 승인/거절 사례를 넣고 화면의 확률/판단/6행 기여 표가 모델 출력과 일치하는지 확인했습니다. 동일 데이터/모델 해시와 SHAP 가산성도 확인했습니다.
+
+Chrome에서도6개 입력을 제출해 기본 사례의0.01%/모형 승인, 높은 위험의 가상 사례의90.29%/모형 거절을 직접 확인했습니다. 두 사례의 확률과6행 기여는 같은 모델의 직접 계산과 일치했습니다. Waterfall이 전체 폭으로 지나치게 커지던 배치를 고쳐 기여 표와 나란히 볼 수 있게 했습니다.
+
+![입력에 따른 확률과 예측 기여](outputs/dashboard.png)
 
 ## 설치와 재현
 
@@ -128,7 +134,7 @@ python prepare.py --source /path/to/A5-1 --data /path/to/finance_data.csv
 python analysis_clustering.py
 python analysis_shap.py
 python -m unittest discover -s tests -v
-streamlit run app.py --browser.gatherUsageStats false
+streamlit run app.py --server.headless true --browser.gatherUsageStats false
 ```
 
 source에는 A5-1 제출 저장소 경로를 지정합니다. prepare는 데이터/모델 해시를 확인하고6입력 검증 모듈/분류 모델/같은 Train-Test행 위치를 연결합니다. 이후 분석에서도 해시를 재확인합니다. 예측 모델을 새로 학습하거나 원본 CSV를 고치지 않습니다.

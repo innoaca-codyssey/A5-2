@@ -40,15 +40,18 @@ if submitted:
     st.write("모형 기준: 거절" if probability[0] >= 0.5 else "모형 기준: 승인")
     st.caption("기준 확률0.5. 오른쪽 기여는 연체 확률을 높이고 왼쪽 기여는 낮춥니다.")
     shap.plots.waterfall(explanation[0], max_display=6, show=False)
-    st.pyplot(plt.gcf())
+    chart_column, table_column = st.columns([1.2, 1])
+    with chart_column:
+        st.pyplot(plt.gcf(), width="content")
     plt.close("all")
-    st.dataframe(
-        pd.DataFrame(
-            {
-                "변수": FEATURES,
-                "입력": raw.iloc[0].to_numpy(),
-                "확률 기여도": explanation.values[0],
-            }
-        ),
-        hide_index=True,
-    )
+    with table_column:
+        st.dataframe(
+            pd.DataFrame(
+                {
+                    "변수": FEATURES,
+                    "입력": raw.iloc[0].to_numpy(),
+                    "확률 기여도": explanation.values[0],
+                }
+            ),
+            hide_index=True,
+        )
